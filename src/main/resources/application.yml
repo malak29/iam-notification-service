@@ -1,0 +1,99 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: iam-notification-service
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+
+# Notification Configuration
+notification:
+  email:
+    provider: ${EMAIL_PROVIDER:smtp}  # smtp, aws-ses, sendgrid
+    from-address: ${EMAIL_FROM:noreply@iam-system.com}
+    from-name: ${EMAIL_FROM_NAME:IAM System}
+    enabled: ${EMAIL_ENABLED:true}
+    retry-attempts: ${EMAIL_RETRY_ATTEMPTS:3}
+
+  sms:
+    provider: ${SMS_PROVIDER:mock}  # mock, aws-sns, twilio
+    from-number: ${SMS_FROM_NUMBER:+1234567890}
+    enabled: ${SMS_ENABLED:true}
+    retry-attempts: ${SMS_RETRY_ATTEMPTS:3}
+
+  template:
+    storage: ${TEMPLATE_STORAGE:file}  # file, aws-s3, database
+    default-language: ${TEMPLATE_DEFAULT_LANGUAGE:en}
+    cache-enabled: ${TEMPLATE_CACHE_ENABLED:true}
+    cache-ttl-minutes: ${TEMPLATE_CACHE_TTL:60}
+
+  queue:
+    enabled: ${QUEUE_ENABLED:true}
+    provider: ${QUEUE_PROVIDER:redis}  # redis, aws-sqs
+    max-retries: ${QUEUE_MAX_RETRIES:3}
+    retry-delay-seconds: ${QUEUE_RETRY_DELAY:30}
+    batch-size: ${QUEUE_BATCH_SIZE:10}
+
+  real-time:
+    enabled: ${REALTIME_ENABLED:true}
+    provider: ${REALTIME_PROVIDER:websocket}  # websocket, aws-websocket
+    connection-timeout-seconds: ${REALTIME_TIMEOUT:30}
+    max-connections: ${REALTIME_MAX_CONNECTIONS:1000}
+
+# AWS Configuration (Production)
+aws:
+  enabled: ${AWS_ENABLED:false}
+  region: ${AWS_REGION:us-east-1}
+  access-key-id: ${AWS_ACCESS_KEY_ID:}
+  secret-access-key: ${AWS_SECRET_ACCESS_KEY:}
+  s3:
+    bucket-name: ${AWS_S3_BUCKET:iam-notification-templates}
+
+# SMTP Configuration (Development)
+spring:
+  mail:
+    host: ${SMTP_HOST:smtp.gmail.com}
+    port: ${SMTP_PORT:587}
+    username: ${SMTP_USERNAME:}
+    password: ${SMTP_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+
+# Twilio Configuration (Alternative SMS)
+twilio:
+  account-sid: ${TWILIO_ACCOUNT_SID:}
+  auth-token: ${TWILIO_AUTH_TOKEN:}
+  from-number: ${TWILIO_FROM_NUMBER:}
+
+# SendGrid Configuration (Alternative Email)
+sendgrid:
+  api-key: ${SENDGRID_API_KEY:}
+
+# JWT configuration
+jwt:
+  secret: ${JWT_SECRET:dev-secret-key}
+  expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when-authorized
+
+logging:
+  level:
+    com.iam.notification: INFO
+    software.amazon.awssdk: WARN
+    com.twilio: WARN
+    com.sendgrid: WARN

@@ -1,0 +1,31 @@
+spring:
+  r2dbc:
+    url: ${SPRING_R2DBC_URL:r2dbc:postgresql://postgres:5432/iam_db}
+    username: ${SPRING_R2DBC_USERNAME:iam_malak}
+    password: ${SPRING_R2DBC_PASSWORD:Malak123}
+
+  data:
+    redis:
+      host: ${SPRING_DATA_REDIS_HOST:redis}
+      port: ${SPRING_DATA_REDIS_PORT:6379}
+
+  mail:
+    host: ${SMTP_HOST:smtp.gmail.com}
+    port: ${SMTP_PORT:587}
+    username: ${SMTP_USERNAME:}
+    password: ${SMTP_PASSWORD:}
+
+notification:
+  email:
+    provider: ${EMAIL_PROVIDER:smtp}
+    from-address: ${EMAIL_FROM:noreply@iam-system.com}
+
+  sms:
+    provider: ${SMS_PROVIDER:mock}
+
+aws:
+  enabled: ${AWS_ENABLED:false}
+
+logging:
+  level:
+    com.iam.notification: INFO
