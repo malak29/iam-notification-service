@@ -96,4 +96,4 @@ coverage/
 # Application specific
 uploads/
 temp/
-cache/
+cache/.env.prod
