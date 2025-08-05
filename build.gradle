@@ -1,0 +1,70 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.0'
+    id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'com.iam'
+version = '1.0.0'
+sourceCompatibility = '21'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Common utilities
+    implementation project(':iam-common-utilities')
+
+    // Reactive Spring Boot
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Email support
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+    // Reactive Redis for queue management
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
+
+    // WebSocket for real-time notifications
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
+    // Template engine for email templates
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+    // AWS SDK v2 (Production Ready)
+    implementation platform('software.amazon.awssdk:bom:2.21.29')
+    implementation 'software.amazon.awssdk:ses'
+    implementation 'software.amazon.awssdk:sns'
+    implementation 'software.amazon.awssdk:s3'
+
+    // Twilio SDK (Alternative SMS provider)
+    implementation 'com.twilio.sdk:twilio:9.14.1'
+
+    // SendGrid SDK (Alternative email provider)
+    implementation 'com.sendgrid:sendgrid-java:4.9.3'
+
+    // JSON processing for templates
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
+    // R2DBC PostgreSQL driver
+    implementation 'org.postgresql:r2dbc-postgresql'
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.36'
+    annotationProcessor 'org.projectlombok:lombok:1.18.36'
+
+    // Testing
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.projectreactor:reactor-test:3.6.12'
+    testImplementation 'org.testcontainers:testcontainers'
+    testImplementation 'org.testcontainers:postgresql'
+    testCompileOnly 'org.projectlombok:lombok:1.18.36'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.36'
+}
+
+test {
+    useJUnitPlatform()
+}
