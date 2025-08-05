@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Alert</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f4f4;">
+<table cellpadding="0" cellspacing="0" width="100%" style="background-color: #f4f4f4; padding: 20px;">
+    <tr>
+        <td align="center">
+            <table cellpadding="0" cellspacing="0" width="600" style="background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                <!-- Header -->
+                <tr>
+                    <td style="background-color: #ffc107; padding: 40px; text-align: center;">
+                        <h1 style="color: #212529; margin: 0; font-size: 28px; font-weight: 600;">
+                            🛡️ Security Alert
+                        </h1>
+                    </td>
+                </tr>
+
+                <!-- Content -->
+                <tr>
+                    <td style="padding: 40px;">
+                        <div style="background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 6px; padding: 20px; margin: 0 0 20px 0;">
+                            <h2 style="color: #721c24; font-size: 20px; margin: 0 0 10px 0;">
+                                Security Event Detected
+                            </h2>
+                            <p style="color: #721c24; font-size: 16px; margin: 0; font-weight: 600;">
+                                Event Type: <span th:text="${alertType}">Unknown</span>
+                            </p>
+                            <p style="color: #721c24; font-size: 14px; margin: 10px 0 0 0;">
+                                Time: <span th:text="${timestamp}">Unknown</span>
+                            </p>
+                        </div>
+
+                        <p style="color: #666666; font-size: 16px; line-height: 1.6; margin: 0 0 20px 0;">
+                            We detected unusual activity on your account that requires your attention. Please review your security settings and recent activity.
+                        </p>
+
+                        <!-- CTA Button -->
+                        <div style="text-align: center; margin: 30px 0;">
+                            <a th:href="${actionUrl}" style="background: #dc3545; color: #ffffff; padding: 15px 30px; text-decoration: none; border-radius: 6px; display: inline-block; font-weight: 600; font-size: 16px;">
+                                Review Security Settings
+                            </a>
+                        </div>
+
+                        <div style="background: #d1ecf1; border: 1px solid #bee5eb; border-radius: 6px; padding: 15px; margin: 20px 0;">
+                            <p style="color: #0c5460; font-size: 14px; margin: 0;">
+                                <strong>What should you do?</strong><br>
+                                • Change your password immediately<br>
+                                • Review recent login activity<br>
+                                • Enable two-factor authentication<br>
+                                • Contact support if you notice unauthorized access
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Footer -->
+                <tr>
+                    <td style="background-color: #f8f9fa; padding: 20px; text-align: center; border-top: 1px solid #eee;">
+                        <p style="color: #999999; font-size: 12px; margin: 0;">
+                            This is an automated security alert from IAM System.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
