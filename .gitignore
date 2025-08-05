@@ -77,6 +77,7 @@ application-local.properties
 .env.local
 .env.staging
 .env.production
+.env.prod
 
 # Database
 *.db
